@@ -1,6 +1,7 @@
 -r requirements.txt
 
 coverage==4.2
+coveralls
 pylint
 pytest
 pytest-aiohttp
