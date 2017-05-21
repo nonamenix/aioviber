@@ -136,4 +136,3 @@ class Api:
 
     async def get_account_info(self):
         return await self._make_request(self.endpoints.GET_ACCOUNT_INFO)
-

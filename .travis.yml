@@ -1,0 +1,16 @@
+language: python
+python:
+- '3.5'
+install:
+- pip install -r requirements-dev.txt
+script:
+- pytest --cov-report html:.reports/coverage --cov-config .coveragerc --cov-report term:skip-covered --cov=aioviber
+after_success: coveralls
+#deploy:
+#  provider: pypi
+#  user: nonamenix
+#  password:
+#    secure: ...
+#  on:
+#    distributions: sdist bdist_wheel
+#    repo: nonamenix/aioviber

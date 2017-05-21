@@ -1,0 +1,6 @@
+[run]
+omit = aioviber/tests/*
+branch = true
+
+[report]
+show_missing = True
