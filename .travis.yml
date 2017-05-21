@@ -6,11 +6,11 @@ install:
 script:
 - pytest --cov-report html:.reports/coverage --cov-config .coveragerc --cov-report term:skip-covered --cov=aioviber
 after_success: coveralls
-#deploy:
-#  provider: pypi
-#  user: nonamenix
-#  password:
-#    secure: ...
-#  on:
-#    distributions: sdist bdist_wheel
-#    repo: nonamenix/aioviber
+deploy:
+  provider: pypi
+  user: nonamenix
+  password:
+    secure: O6fo9lbcnQ6uDIl6Bg4kaGBaQkM100TMpNwy2m/iLcO++4tlGC+4Sma1XqDhYAlruRn0FltfOqO2Ej83MoSLvEQQXomDyzleO1iIKE8iM2bhDLz7zLtckyBs90nFWt8gApDEKL4urHdbPTG1T9uYkmK4h9zWV4U+F9fkK1DJrkYIO4hVhINuMrVl0kUiV792qU9LnMnLbDSKFu8zw/V5Jko3KKIv3as3h2fVx9bOxMDjpBKIodzmnUD2nOv+0MkcllLl3vflWHjyk59ELVaQ2DJDlrPU5ThyzYw+EnQFDL2ost4qK3FpTch60PSJfaIQQRQLSD0saQGU9jhoPV/GaFXAuYb7e+en2llWcI4nH/1FuILKea/xBnpOznLgODuC9gEzR5xSWKLRCaHL8zxEwu62YEipxlUhFlGWfaNCaNjcNdh2BxqUuo9bIydHPJ1Kg22SHUICD52SO0V8wzCYe+tijR3Bn5FFnq+d8cznZM6NrhjbtjDCP+3bwhyIRf2LFqNHcXyJdQjS5GD8VZes9Lsn6wW4PlwqmQtjuEWy/e5C5yKp6DOc2jOo5gy+Nvt2/OVQ6ooxr3rIKQwGXAovyca9j+e4BcTRnUu35gIZSv32QiqbtftETFlFTSrQXqK9K1ezuYuqnS/bqFexwQovUjPG9LRKk7scAAon/MjiuHw=
+  on:
+    distributions: sdist bdist_wheel
+    repo: nonamenix/aioviber
