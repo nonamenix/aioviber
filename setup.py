@@ -35,8 +35,8 @@ if DEV_VERSION:
         config.write(f)
 
 # create a README.txt file from .md
-#with open(README_TXT, 'wb') as f:
-#    f.write(LONG_DESCRIPTION.encode())
+with open(README_TXT, 'wb') as f:
+   f.write(LONG_DESCRIPTION.encode())
 
 setup(
     name=NAME,
@@ -52,4 +52,4 @@ setup(
 )
 
 # delete README.txt
-#os.remove(README_TXT)
+os.remove(README_TXT)
