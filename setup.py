@@ -36,7 +36,7 @@ if DEV_VERSION:
 
 # create a README.txt file from .md
 with open(README_TXT, 'wb') as f:
-   f.write(LONG_DESCRIPTION.encode())
+    f.write(LONG_DESCRIPTION.encode())
 
 setup(
     name=NAME,

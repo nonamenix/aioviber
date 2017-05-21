@@ -14,3 +14,4 @@ deploy:
   on:
     distributions: sdist bdist_wheel
     repo: nonamenix/aioviber
+    tags: true
