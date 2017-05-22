@@ -103,13 +103,14 @@ async def ping(chat: Chat, matched):
 
 Below is a list of all supported message types:
 
-* text
-* picture
-* video
-* file
-* location
-* contact 
-* URL
+* [text](https://developers.viber.com/docs/api/rest-bot-api/#text-message)
+* [picture](https://developers.viber.com/docs/api/rest-bot-api/#picture-message)
+* [video](https://developers.viber.com/docs/api/rest-bot-api/#video-message)
+* [file](https://developers.viber.com/docs/api/rest-bot-api/#file-message)
+* [location](https://developers.viber.com/docs/api/rest-bot-api/#location-message)
+* [contact](https://developers.viber.com/docs/api/rest-bot-api/#contact-message)
+* [sticker](https://developers.viber.com/docs/api/rest-bot-api/#sticker-message)
+* [URL](https://developers.viber.com/docs/api/rest-bot-api/#resource-url-2)
 
 For processing other messages type you can use `@bot.message_handler('location')` decorator.
  
