@@ -40,6 +40,7 @@ async def ping(chat: Chat, matched):
 async def user_subscribed(chat: Chat, request: ViberSubscribedRequest):
     await chat.send_text('Welcome')    
     
+    
 @bot.message_handler('sticker')
 async def sticker(chat: Chat):
     await chat.send_sticker(5900)
