@@ -71,7 +71,9 @@ There is no way to run viber bot in polling mode like Telegram.
 pip install aioviber
 ```
 
-# Viber API Entities
+# Viber API
+
+## Messaging flow
 
 ![Messaging flow](https://developers.viber.com/docs/img/send_and_receive_message_flow.png)
 
