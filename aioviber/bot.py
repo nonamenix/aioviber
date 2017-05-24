@@ -17,7 +17,7 @@ from aioviber.api import Api
 from aioviber.messagetype import MessageType
 
 API_URL = "https://chatapi.viber.com/pa"
-USER_AGENT = "WOWSViber/1.0"
+USER_AGENT = "aioviber/1.0"
 
 __author__ = "Danil Ivanov"
 __copyright__ = "Copyright 2017 Danil Ivanov"
@@ -33,10 +33,15 @@ class Bot:
                  auth_token: str,
                  webhook: str,
                  webhook_events: list = None,
+                 set_webhook_on_startup: bool = True,
+                 unset_webhook_on_cleanup: bool = True,
                  host: str = '0.0.0.0',
                  port: int = 8000,
                  loop: aio.AbstractEventLoop = None,
-                 check_signature: bool = True):
+                 check_signature: bool = True,
+                 static_serve: bool = False,
+
+                 ):
         assert len(name) < 28, "Length of name should be shorty then 28 symbols"
         self.name = name
         self.avatar = avatar
@@ -60,6 +65,8 @@ class Bot:
         # Viber webhook
         self.webhook = webhook
         self.webhook_events = webhook_events
+        self._set_webhook_on_startup = set_webhook_on_startup
+        self._unset_webhook_on_cleanup = unset_webhook_on_cleanup
 
         def no_event_handle(event_type: str):
             return lambda msg: logger.debug("no event handle for %s", event_type)
@@ -78,12 +85,12 @@ class Bot:
 
         # Application
         self.check_signature = check_signature
-        self.app = self.get_app()
+        self.app = self.get_app(static_serve=static_serve)
 
     @property
     def session(self):
         if not self._session:
-            self._session = aiohttp.ClientSession()
+            self._session = aiohttp.ClientSession(loop=self.loop)
         return self._session
 
     async def set_webhook_on_startup(self):
@@ -93,19 +100,22 @@ class Bot:
 
         self.loop.create_task(self.api.set_webhook(self.webhook, self.webhook_events))
 
-    def get_app(self) -> web.Application:
+    def get_app(self, static_serve=False) -> web.Application:
         """
         Create aiohttp application for webhook handling
         """
-        app = get_app(self, loop=self.loop)
+        app = get_app(self, loop=self.loop, static_serve=static_serve)
 
         # webhook handler
         webhook_path = urlparse(self.webhook).path
         app.router.add_post(webhook_path, self.webhook_handle)
 
-        # register webhook
-        app.on_cleanup.append(lambda a: a.bot.api.unset_webhook())
-        app.on_startup.append(lambda a: a.bot.set_webhook_on_startup())
+        # viber webhooks registering
+        if self._unset_webhook_on_cleanup:
+            app.on_cleanup.append(lambda a: a.bot.api.unset_webhook())
+
+        if self._set_webhook_on_startup:
+            app.on_startup.append(lambda a: a.bot.set_webhook_on_startup())
 
         return app
 
