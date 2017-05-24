@@ -170,7 +170,7 @@ class Bot:
         """
 
         def decorator(coro):
-            assert aio.iscoroutinefunction(coro), 'Decorated function should be corountine'
+            assert aio.iscoroutinefunction(coro), 'Decorated function should be coroutine'
 
             self.add_command(regexp, coro)
             return coro
@@ -195,7 +195,7 @@ class Bot:
         """
 
         def decorator(coro):
-            assert aio.iscoroutinefunction(coro), 'Decorated function should be corountine'
+            assert aio.iscoroutinefunction(coro), 'Decorated function should be coroutine'
 
             self.add_handler(message_type, coro)
             return coro
@@ -217,7 +217,7 @@ class Bot:
         assert event_type in EventType.not_message_events(), 'Wrong event type'
 
         def wrap(coro):
-            assert aio.iscoroutinefunction(coro), 'Decorated function should be corountine'
+            assert aio.iscoroutinefunction(coro), 'Decorated function should be coroutine'
 
             self._events_callbacks[event_type] = coro
             return coro
@@ -226,7 +226,7 @@ class Bot:
 
     def on_subscribed(self):
         def decorator(coro):
-            assert aio.iscoroutine(coro), 'function should be corountine'
+            assert aio.iscoroutine(coro), 'function should be coroutine'
 
             self._events_callbacks[EventType.SUBSCRIBED] = coro
             return coro

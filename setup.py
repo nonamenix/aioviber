@@ -20,6 +20,8 @@ URL = get_config('url')
 AUTHOR = 'nonamenix'
 AUTHOR_EMAIL = 'nonamenix@gmail.com'
 README_TXT = 'README.txt'
+README = 'README.rst'
+LONG_DESCRIPTION = open(os.path.join(PROJECT_DIR, README), encoding='utf8').read()
 
 REQUIREMENTS_FILE = 'requirements.txt'
 REQUIREMENTS = open(os.path.join(PROJECT_DIR, REQUIREMENTS_FILE)).readlines()
@@ -32,10 +34,15 @@ if DEV_VERSION:
     with open(PROJECT_INI, 'w') as f:
         config.write(f)
 
+# create a README.txt file from .rst
+with open(README_TXT, 'wb') as f:
+    f.write(LONG_DESCRIPTION.encode())
+
 setup(
     name=NAME,
     version=VERSION,
     description=DESCRIPTION,
+    long_description='',
     author=AUTHOR,
     author_email=AUTHOR_EMAIL,
     url=URL,
@@ -43,3 +50,6 @@ setup(
     packages=find_packages(),
     install_requires=REQUIREMENTS,
 )
+
+# delete README.txt
+os.remove(README_TXT)
