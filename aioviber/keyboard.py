@@ -1,9 +1,6 @@
 from typing import List
 
-
-def snake_case_2_camel_case(name):
-    words = name.split('_')
-    return "".join(["{}{}".format(word[0].upper(), word[1:]) for word in words])
+from aioviber.utils import snake_case_2_camel_case, add_url_params
 
 
 class DefaultEnum:
@@ -91,7 +88,11 @@ class Button:
             bg_color: str = None,
             bg_media_type: str = None,
             bg_loop: bool = None,
-            _utm: str = '?utm_campaign=viber&utm_medium=link&utm_source=social-networks'
+            _utm: dict = {
+                'utm_campaign': 'viber',
+                'utm_medium': 'link',
+                'utm_source': 'social-networks'
+            }
     ):
         """
         :param action_body: ext for reply and none. ActionType or URL for open-url.
@@ -156,7 +157,7 @@ class Button:
         # Append utm
         self._utm = _utm
         if self.action_type == ActionType.open_url:
-            self.action_body = "{}{}".format(self.action_body, self._utm)
+            self.action_body = add_url_params(self.action_body, self._utm)
 
     def to_dict(self) -> dict:
         d = {}

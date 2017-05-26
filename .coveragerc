@@ -1,6 +1,12 @@
 [run]
-omit = aioviber/tests/*
+omit=aioviber/tests/*
 branch = true
 
 [report]
-show_missing = True
+show_missing = False
+
+[term]
+skip_covered = True
+
+[html]
+directory = .reports/coverage
