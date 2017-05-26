@@ -104,7 +104,7 @@ class Bot:
         """
         Create aiohttp application for webhook handling
         """
-        app = get_app(self, loop=self.loop, static_serve=static_serve)
+        app = get_app(self, static_serve=static_serve)
 
         # webhook handler
         webhook_path = urlparse(self.webhook).path
