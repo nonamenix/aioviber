@@ -10,11 +10,6 @@ DEFAULT_UTM = {
 
 
 class DefaultEnum:
-    @property
-    @classmethod
-    def default(cls):
-        return cls._default
-
     @classmethod
     def is_default(cls, choice):
         return choice == cls._default or choice is None
@@ -25,7 +20,7 @@ class BgMediaType(DefaultEnum):
     gif = 'gif'
 
     all = (picture, gif)
-    _default = 'picture'
+    _default = picture
 
 
 class TextVerticalAlign(DefaultEnum):
@@ -69,28 +64,28 @@ class MediaType(DefaultEnum):
     gif = 'gif'
 
     all = (picture, gif)
-    _default = 'picture'
+    _default = picture
 
 
 class Button:
     def __init__(
-        self,
-        action_body: str,
-        columns: int = 6,
-        rows: int = 1,
-        silent: bool = None,
-        image: str = None,
-        text: str = None,
-        action_type: str = None,
-        text_v_align: str = None,
-        text_h_align: str = None,
-        text_size: str = None,
-        text_opacity: int = None,
-        bg_media: str = None,
-        bg_color: str = None,
-        bg_media_type: str = None,
-        bg_loop: bool = None,
-        _utm: dict = DEFAULT_UTM
+            self,
+            action_body: str,
+            columns: int = 6,
+            rows: int = 1,
+            silent: bool = None,
+            image: str = None,
+            text: str = None,
+            action_type: str = None,
+            text_v_align: str = None,
+            text_h_align: str = None,
+            text_size: str = None,
+            text_opacity: int = None,
+            bg_media: str = None,
+            bg_color: str = None,
+            bg_media_type: str = None,
+            bg_loop: bool = None,
+            _utm: dict = DEFAULT_UTM
     ):
         """
         :param action_body: ext for reply and none. ActionType or URL for open-url.
@@ -235,10 +230,10 @@ class Carousel:
     """
 
     def __init__(
-        self,
-        buttons_group_columns: int = 6,  # ButtonsGroupColumns
-        buttons_group_rows: int = 6,  # ButtonsGroupRows
-        buttons: List[Button] = []
+            self,
+            buttons_group_columns: int = 6,  # ButtonsGroupColumns
+            buttons_group_rows: int = 6,  # ButtonsGroupRows
+            buttons: List[Button] = []
     ):
         assert 0 < buttons_group_rows <= 7, 'Possible values for buttons group rows 1 - 7'
         self.buttons_group_rows = buttons_group_rows

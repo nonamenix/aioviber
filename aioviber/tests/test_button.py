@@ -1,7 +1,7 @@
 from urllib.parse import urlparse
 import pytest
 
-from aioviber.keyboard import Button, ActionType, TextHorizontalAlign, TextVerticalAlign, TextSize
+from aioviber.keyboard import Button, ActionType, TextHorizontalAlign, TextVerticalAlign, TextSize, ExternalLinkButton
 
 
 def test_no_arguments():
@@ -73,3 +73,14 @@ def test_customized_button_to_dict():
                'TextSize': 'large',
                'TextVAlign': 'bottom'
            }
+
+
+def test_external_link_creation():
+    btn = ExternalLinkButton('http://example.com', 'example.com', _utm='')
+    assert btn.text == 'example.com'
+    assert btn.action_body == 'http://example.com'
+
+
+def test_bad_external_link_creation():
+    with pytest.raises(TypeError):
+        assert ExternalLinkButton('http://example.com')
