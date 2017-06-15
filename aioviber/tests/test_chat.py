@@ -10,6 +10,7 @@ import pytest
 from aioviber import Chat
 
 
+@pytest.mark.skip
 def test_init():
     # http://www.voidspace.org.uk/python/mock/patch.html#patch-multiple
     chat = Chat()
