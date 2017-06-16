@@ -39,9 +39,7 @@ class Bot:
                  port: int = 8000,
                  loop: aio.AbstractEventLoop = None,
                  check_signature: bool = True,
-                 static_serve: bool = False,
-
-                 ):
+                 static_serve: bool = False) -> None:
         assert len(name) < 28, "Length of name should be shorty then 28 symbols"
         self.name = name
         self.avatar = avatar
@@ -94,10 +92,8 @@ class Bot:
         return self._session
 
     async def set_webhook_on_startup(self):
-        await  aio.sleep(3)  # waiting while api will be available
-
+        await aio.sleep(3)  # waiting while api will be available
         logger.info('set web hook on startup %s', self.webhook)
-
         self.loop.create_task(self.api.set_webhook(self.webhook, self.webhook_events))
 
     def get_app(self, static_serve=False) -> web.Application:
@@ -119,7 +115,7 @@ class Bot:
 
         return app
 
-    async def webhook_handle(self, request):
+    async def webhook_handle(self, request) -> web.Response:
         data = await request.json()
         viber_request = create_request(data)  # type: ViberRequest
 
@@ -128,7 +124,7 @@ class Bot:
 
         return web.Response()
 
-    async def _process_request(self, request: ViberRequest):
+    async def _process_request(self, request: ViberRequest) -> None:
         logger.debug('request: %s', str(request))
 
         coro = None
@@ -145,7 +141,7 @@ class Bot:
             # TODO: add error processing
             t = self.loop.create_task(coro)
 
-    async def _process_message(self, request: ViberMessageRequest):
+    async def _process_message(self, request: ViberMessageRequest) -> None:
         logger.debug('_process_message %s', request)
 
         if request.message._message_type == MessageType.TEXT:  # isinstance
@@ -158,10 +154,10 @@ class Bot:
             # Process other messages types with _handlers
             return await self._handlers[request.message._message_type](Chat(self.api, message=request))
 
-    def run(self):
+    def run(self) -> None:
         web.run_app(self.app, host=self.host, port=self.port, loop=self.loop)
 
-    def __del__(self):
+    def __del__(self) -> None:
 
         try:
             self.session.close()

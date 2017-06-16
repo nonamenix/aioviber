@@ -43,7 +43,7 @@ class Api:
 
         return result
 
-    async def send_message(self, to: str, message: Message):
+    async def send_message(self, to: str, message: Message) -> str:
         """ The send_message API allows PAs to send messages to Viber users
         who subscribe to the PA. Sending a message to a user will be possible
         only after the user has subscribed to the PA by pressing the subscribe
@@ -107,14 +107,14 @@ class Api:
         self._logger.debug("unsetting webhook")
         return await self.set_webhook('')
 
-    async def send_messages(self, to: str, messages: List[Message]):
+    async def send_messages(self, to: str, messages: List[Message]) -> List:
         self._logger.debug("going to send messages: {0}, to: {1}".format(messages, to))
 
         return await aio.gather(
             *[self.send_message(to, message) for message in messages], loop=self.loop
         )
 
-    async def get_users_status(self, ids: List[str]):
+    async def get_users_status(self, ids: List[str]) -> List:
         """ The get_online request will fetch the online status of a given
         subscribed PA members. The API supports up to 100 user id per request
         and those users must be subscribed to the PA."""
