@@ -13,11 +13,11 @@ from aioviber.keyboard import Keyboard, Carousel
 
 
 class Chat:
-    def __init__(self, message: ViberMessageRequest = None, api: Api = None, sender: UserProfile = None):
+    def __init__(self, api: Api, message: ViberMessageRequest = None, sender: UserProfile = None):
         assert message or sender, 'Specify message or sender'
 
-        self.message = message
         self.api = api
+        self.message = message
         self._sender = sender
 
     @property

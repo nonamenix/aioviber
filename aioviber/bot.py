@@ -153,10 +153,10 @@ class Bot:
             for pattern, handler in self._commands:
                 matched = re.search(pattern, str(request.message.text), re.I)
                 if matched:
-                    return await handler(Chat(message=request, api=self.api), matched)
+                    return await handler(Chat(self.api, message=request), matched)
         else:
             # Process other messages types with _handlers
-            return await self._handlers[request.message._message_type](Chat(request, self.api))
+            return await self._handlers[request.message._message_type](Chat(self.api, message=request))
 
     def run(self):
         web.run_app(self.app, host=self.host, port=self.port, loop=self.loop)
