@@ -1,5 +1,6 @@
 -r requirements.txt
 
+asynctest
 coverage==4.2
 coveralls
 pylint
