@@ -88,10 +88,11 @@ class Api:
 
             for event in webhook_events:
                 if event not in EventType.all():
-                    webhook_events.pop(event)
+                    webhook_events.remove(event)
                     self._logger.warning('Wrong event type {} in set_webhook'.format(event))
 
-            data['event_types'] = webhook_events
+            if len(webhook_events) > 0:
+                data['event_types'] = webhook_events
 
         result = await self._make_request(self.endpoints.SET_WEBHOOK, data)
         return result['event_types']
