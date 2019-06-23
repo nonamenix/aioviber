@@ -232,7 +232,7 @@ class Bot:
 
     def on_subscribed(self):
         def decorator(coro):
-            assert aio.iscoroutine(coro), 'function should be coroutine'
+            assert aio.iscoroutinefunction(coro), 'function should be coroutine'
 
             self._events_callbacks[EventType.SUBSCRIBED] = coro
             return coro
