@@ -62,6 +62,12 @@ Install
 ::
 
     pip install aioviber
+    
+
+Local testing
+=============
+
+For testing your bot from local machine use ngrok. Read more https://github.com/nonamenix/aioviber/issues/1#issuecomment-504766258
 
 Viber API
 =========
