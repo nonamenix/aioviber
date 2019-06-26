@@ -113,5 +113,5 @@ decorator
    :target: https://coveralls.io/github/nonamenix/aioviber
 .. |Package version| image:: https://badge.fury.io/py/aioviber.svg
    :target: https://pypi.python.org/pypi/aioviber
-.. |Python versions| image:: https://img.shields.io/badge/python-3.5%2C%203.6-blue.svg
+.. |Python versions| image:: https://img.shields.io/badge/python-3.5%2C%203.6%2C%203.7-blue.svg
    :target: https://www.python.org/doc/versions/
