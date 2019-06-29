@@ -49,6 +49,7 @@ def test_command_should_be_coroutine(bot):
             pass
 
 
-@pytest.mark.skip
 def test_default_command(bot):
-    assert False
+    @bot.default
+    def default(chat):
+        pass

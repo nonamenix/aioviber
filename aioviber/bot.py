@@ -74,12 +74,13 @@ class Bot:
 
         # Callback — function for request processing messages excluded
         self._events_callbacks = {et: no_event_handle(et) for et in EventType.all()}
+
         # command — functions for processing text messages
         self._commands = []
+        self._default_command = lambda chat: None
+
         # handle — functions for processing messages exclude text
         self._handlers = {mt: no_message_handle(mt) for mt in MessageType.all()}
-
-        self._default = lambda event: None
 
         # Application
         self.check_signature = check_signature
@@ -150,6 +151,7 @@ class Bot:
                 matched = re.search(pattern, str(request.message.text), re.I)
                 if matched:
                     return await handler(Chat(self.api, message=request), matched)
+            return await self._default_command(Chat(self.api, message=request))
         else:
             # Process other messages types with _handlers
             return await self._handlers[request.message._message_type](Chat(self.api, message=request))
@@ -165,8 +167,21 @@ class Bot:
             pass
 
     def add_command(self, regexp, fn):
-        """ Register regexp based command for text messages processing """
+        """
+        Register regexp based command for text messages processing
+        """
         self._commands.append((regexp, fn))
+
+    def default(self, coro):
+        """
+        Register default command for text messages processing
+        """
+
+        def decorator(coro):
+            self._default_command = coro
+            return coro
+
+        return decorator
 
     def command(self, regexp: str):
         """
