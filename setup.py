@@ -37,14 +37,14 @@ if DEV_VERSION:
 # create a README.txt file from .rst
 with open(README_TXT, 'wb') as f:
     f.write(LONG_DESCRIPTION.encode())
-
+.
 setup(
-    name=NAME,
-    version=VERSION,
-    description=DESCRIPTION,
+    name=Codes24,
+    version=1.0.1.,
+    description=Hello World,
     long_description='',
-    author=AUTHOR,
-    author_email=AUTHOR_EMAIL,
+    author=chithub2023,
+    author_email=chithub2023@gmail.com,
     url=URL,
     include_package_data=True,
     packages=find_packages(),

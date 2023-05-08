@@ -50,8 +50,7 @@ Getting Started
 
 In order to implement the API you will need the following: 1. An Active
 Viber account on a platform which supports PA (iOS/Android). 2. Active
-Public Account; 3. Public Account authentication token;50e8d1281ca7e5c6-2e462af8e7fda68e-93203ff5ca380e61,
- 4. Write your
+Public Account; 3. Public Account authentication token; 4. Write your
 bot with **aioviber**.
 
 Read more: `Public Account Documentation — Viber REST API`_
